@@ -67,7 +67,7 @@ extension NameInteractor: NameInteractorInput {
 extension NameInteractor: HTTPClient {
     
     func fetch(_ endpoint: Endpoint) async throws -> Data {
-        let request = try makeRequest(with: endpoint)
+        let request = try endpoint.makeRequest()
         return try await execute(request: request)
     }
     

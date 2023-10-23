@@ -19,4 +19,20 @@ extension Endpoint {
     var scheme: String {
         return "https"
     }
+    
+    func makeRequest() throws -> URLRequest {
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.path = path
+        components.queryItems = parameters
+
+        guard let url = components.url else {
+            throw RequestError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method.name
+        return request
+    }
 }
